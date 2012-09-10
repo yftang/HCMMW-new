@@ -17,8 +17,8 @@ development:
   encoding: unicode
   database: hcmmw-new_development
   pool: 5
-  username: hcmmw-new
-  password:
+  username: root
+  password: 594tyf
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -43,13 +43,5 @@ test:
   encoding: unicode
   database: hcmmw-new_test
   pool: 5
-  username: hcmmw-new
-  password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: hcmmw-new_production
-  pool: 5
-  username: hcmmw-new
-  password:
+  username: root
+  password: 594tyf
