@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "StaticPages" do
+  let(:base_title) { "HCMMW" }
+
   describe "Home page" do
     it "should have the h1 'HCMMW'" do
       visit '/static_pages/home'
@@ -11,7 +13,7 @@ describe "StaticPages" do
     it "should have the right title" do
       visit '/static_pages/home'
       page.should have_selector('title',
-                                :text => "Home | HCMMW")
+                                :text => "Home | #{base_title}")
     end
   end
 
@@ -25,7 +27,7 @@ describe "StaticPages" do
     it "should have the right title" do
       visit '/static_pages/help'
       page.should have_selector('title',
-                                :text => "Help | HCMMW")
+                                :text => "Help | #{base_title}")
     end
   end
 
@@ -39,7 +41,7 @@ describe "StaticPages" do
     it "should have the right title" do
       visit '/static_pages/about'
       page.should have_selector('title',
-                                :text => "About Us | HCMMW")
+                                :text => "About Us | #{base_title}")
     end
   end
 
@@ -53,7 +55,7 @@ describe "StaticPages" do
     it "should have the right title" do
       visit '/static_pages/contact'
       page.should have_selector('title',
-                                :text => "Contact | HCMMW")
+                                :text => "Contact | #{base_title}")
     end
   end
 end
