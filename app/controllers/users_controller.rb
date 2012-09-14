@@ -18,14 +18,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    redirect_to root_path if signed_in?
-    @user = User.new(params[:user])
-    if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to HCMMW!"
-      redirect_to @user
+    if signed_in?
+      redirect_to root_path
     else
-      render 'new'
+      @user = User.new(params[:user])
+      if @user.save
+        sign_in @user
+        flash[:success] = "Welcome to HCMMW!"
+        redirect_to @user
+      else
+        render 'new'
+      end
     end
   end
 
@@ -44,9 +47,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_url
+    if User.find(params[:id]).admin?
+      flash.now[:error] = "Not allowed to delete admin users."
+      redirect_to users_url
+    else
+      User.find(params[:id]).destroy
+      flash.now[:success] = "User destroyed."
+      redirect_to users_url
+    end
   end
 
   private
