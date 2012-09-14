@@ -37,6 +37,13 @@ describe "Authentication" do
       it { should have_link('Sign out', href: signout_path) }
 
       it { should_not have_link('Sign in', href: signin_path) }
+
+      describe "tries to access the new and create actions" do
+        it "should redirect to the root path" do
+          visit signup_path
+          page.should have_selector('title', text: "HCMMW")
+        end
+      end
     end
   end
 
