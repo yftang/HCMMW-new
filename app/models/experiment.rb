@@ -15,4 +15,6 @@ class Experiment < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, presence:true
+
+  default_scope order: 'experiments.created_at DESC'
 end

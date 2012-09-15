@@ -15,7 +15,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
-  has_many :experiments
+  has_many :experiments, dependent: :destroy
 
 # 用户存储到数据库前，所有邮箱地址小写字母存储
   before_save { self.email.downcase! }

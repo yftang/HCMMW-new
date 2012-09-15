@@ -9,4 +9,9 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :experiment do
+    description "Lorem ipsum"
+    user
+  end
 end
