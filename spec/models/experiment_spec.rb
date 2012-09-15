@@ -34,6 +34,21 @@ describe Experiment do
     it { should_not be_valid }
   end
 
+  describe "with blank description" do
+    before { @experiment.description = " " }
+    it { should_not be_valid }
+  end
+
+  describe "with description that is too long" do
+    before { @experiment.description = "a" * 41 }
+    it { should_not be_valid }
+  end
+
+  describe "with blank input file string" do
+    before { @experiment.input_file = " " }
+    it { should_not be_valid }
+  end
+
   describe "accessible attributes" do
     it "should not allow access to user_id" do
       expect do
