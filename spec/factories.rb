@@ -12,6 +12,7 @@ FactoryGirl.define do
 
   factory :experiment do
     description "Lorem ipsum"
+    input_file "lorem"
     user
   end
 end
