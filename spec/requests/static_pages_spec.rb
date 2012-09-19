@@ -14,6 +14,22 @@ describe "StaticPages" do
     let(:page_title) { 'Home' }
 
     it_should_behave_like "all static pages"
+
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:experiment, user: user, description: "Lorem ipsum")
+        FactoryGirl.create(:experiment, user: user, description: "Dolor sit amet")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's experiments" do
+        user.experiments.each do |item|
+          page.should have_selector("span.description", text: item.description)
+        end
+      end
+    end
   end
 
   describe "Help page" do

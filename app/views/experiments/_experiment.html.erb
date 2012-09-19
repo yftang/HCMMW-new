@@ -3,4 +3,9 @@
   <span class="timestamp">
     Posted at <%= experiment.created_at %> .
   </span>
+  <% if current_user?(experiment.user) %>
+    <%= link_to "delete", experiment, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: experiment.description %>
+  <% end %>
 </li>
