@@ -4,46 +4,51 @@ describe "UserPages" do
   subject { page }
 
   describe "index" do
-    let(:user) { FactoryGirl.create(:user) }
+    describe "for non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
 
-    before do
-      sign_in user
-      visit users_path
-    end
-
-    it { should have_selector('title', text: 'All users') }
-    it { should have_selector('h1',    text: 'All users') }
-
-    describe "pagination" do
-
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
-      after(:all)  { User.delete_all }
-
-      it { should have_selector('div.pagination') }
-
-      it "should list each user" do
-        User.paginate(page: 1).each do |user|
-          page.should have_selector('li', text: user.name)
-        end
+      before do
+        sign_in user
+        visit users_path
       end
+
+      it { should_not have_selector('title',  text: 'All users') }
+      it { should_not have_selector('h1',     text: 'All users') }
+      it { should have_selector('title',      text: 'HCMMW') }
     end
 
-    describe "delete links" do
 
-      it { should_not have_link('delete') }
+    describe "for admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
 
-      describe "as an admin user" do
-        let(:admin) { FactoryGirl.create(:admin) }
-        before do
-          sign_in admin
-          visit users_path
+      before do
+        sign_in admin
+        visit users_path
+      end
+
+      it { should have_selector('title', text: 'All users') }
+      it { should have_selector('h1',    text: 'All users') }
+
+      describe "pagination" do
+
+        before(:all) { 30.times { FactoryGirl.create(:user) } }
+        after(:all)  { User.delete_all }
+
+        it { should have_selector('div.pagination') }
+
+        it "should list each user" do
+          User.paginate(page: 1).each do |user|
+            page.should have_selector('li', text: user.name)
+          end
         end
 
-        it { should have_link('delete', href: user_path(User.first)) }
-        it "should be able to delete another user" do
-          expect { click_link('delete') }.to change(User, :count).by(-1)
+        describe "delete links" do
+          it { should have_link('delete', href: user_path(User.first)) }
+          it "should be able to delete another user but self" do
+            expect { click_link('delete') }.to change(User, :count).by(-1)
+          end
+          it { should_not have_link('delete', href: user_path(admin)) }
         end
-        it { should_not have_link('delete', href: user_path(admin)) }
       end
     end
   end
