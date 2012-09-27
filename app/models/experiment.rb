@@ -12,12 +12,12 @@
 
 class Experiment < ActiveRecord::Base
   attr_accessible :description, :input_file
-  belongs_to :user
+# belongs_to :user
   self.per_page = 10
 
   validates :description, presence: true, length: { maximum: 40 }
   validates :input_file, presence: true
-  validates :user_id, presence: true
+# validates :user_id, presence: true
 
   default_scope order: 'experiments.created_at DESC'
 end

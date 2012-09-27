@@ -4,9 +4,15 @@
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
-  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+}
+
+@mixin box_radius($radius: 10px) {
+  -webkit-border-radius:  $radius;
+  -moz-border-radius:     $radius;
+  border-radius:          $radius;
 }
 
 // universal
@@ -215,4 +221,14 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+// experiment analysis wizard
+
+.tool {
+  margin: 0 5px 10px 0;
+  border: 1px solid $grayLighter;
+  @include box_radius(5px);
+  @include box_sizing;
+  background: $grayLighter;
 }

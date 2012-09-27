@@ -1,0 +1,10 @@
+<% provide(:title, 'New experiment') %>
+<h1>Create new experiment</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@experiment) do |f| %>
+      <%= render 'shared/experiment_form', f: f %>
+    <% end %>
+  </div>
+</div>
