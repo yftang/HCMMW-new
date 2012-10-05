@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+require 'carrierwave/orm/activerecord'
 
 class Experiment < ActiveRecord::Base
   attr_accessible :description, :input_file
@@ -20,4 +21,6 @@ class Experiment < ActiveRecord::Base
 # validates :user_id, presence: true
 
   default_scope order: 'experiments.created_at DESC'
+
+  mount_uploader :input_file, InputFileUploader
 end

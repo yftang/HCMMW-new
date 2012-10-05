@@ -227,6 +227,7 @@ aside {
 
 .tool {
   margin: 0 5px 10px 0;
+  padding: 5px;
   border: 1px solid $grayLighter;
   @include box_radius(5px);
   @include box_sizing;
