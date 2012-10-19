@@ -4,7 +4,7 @@
     <%= f.label :description %>
     <%= f.text_field :description, placeholder: "Brief description..." %>
     <%= f.label :input_file %>
-    <%= f.text_field :input_file, placeholder: "Input file..." %>
+    <%= f.file_field :input_file %>
   </div>
   <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
 <% end %>
